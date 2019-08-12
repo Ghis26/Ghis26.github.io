@@ -1,9 +1,9 @@
 import { TodosState } from '../interfaces/todo-state.interface';
 import { GetTodosAction, GetTodosSuccessAction, GetTodosErrorAction,
-     GET_TODOS, GET_TODOS_SUCCESS, GET_TODOS_ERROR } from '../actions/todos.action';
+     GET_TODOS, GET_TODOS_SUCCESS, GET_TODOS_ERROR, CreateTodoAction,
+     CREATE_TODO, UPDATE_TODO, UpdateTodoAction } from '../actions/todos.action';
 import { ActionReducerMap } from '@ngrx/store';
 import { ElementsState } from '../interfaces/element-state.interface';
-import { $ } from 'protractor';
 
 export const initialState: TodosState = {
     data: [],
@@ -19,7 +19,7 @@ export const getTodos =  (state: TodosState) => state.data;
 
 export function reducer(
     state = initialState,
-    action: GetTodosAction | GetTodosErrorAction | GetTodosSuccessAction ): TodosState {
+    action: GetTodosAction | GetTodosErrorAction | GetTodosSuccessAction | CreateTodoAction | UpdateTodoAction ): TodosState {
     switch (action.type) {
         case GET_TODOS: {
             return {
@@ -38,6 +38,18 @@ export function reducer(
             return {
                 ...state,
                 loading: false,
+                data: action.payload
+            };
+        }
+        case CREATE_TODO: {
+            return {
+                ...state,
+                data : action.payload
+            };
+        }
+        case UPDATE_TODO: {
+            return {
+                ...state,
                 data: action.payload
             };
         }

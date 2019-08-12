@@ -7,3 +7,5 @@ export const getElementsState = createFeatureSelector<ElementsState>('elements')
 export const getTodosState = createSelector(getElementsState, (state: ElementsState) => state.todos);
 
 export const getAllTodos = createSelector(getTodosState, getTodos);
+
+// export const updateTodo = createSelector(getAllTodos, (state: ElementsState) => 'done');
